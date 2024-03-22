@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>   
+#include "lista.h"
 
 struct no{ //estrutura de tipo nó representando os elementos da lista
     int info;//inteiro que contém a informação guardada do nó
@@ -12,8 +13,6 @@ struct lista{//estrutura de tipo lista que armazena os elementos(nós)
     struct no* inicio;//ponteiro do tipo nó que sempre aponta para o primeiro elemento da lista
 };
 
-typedef struct no No;
-typedef struct lista Lista;
 
 No* cria_no(int info){//função para criar nós
     No* n = (No*) malloc(sizeof(No));//alocação dinamica do nó
