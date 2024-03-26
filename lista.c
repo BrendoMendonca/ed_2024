@@ -120,3 +120,12 @@ void libera_lista(Lista** l){//função para liberar a lista da memória
     free(*l);
     *l = NULL;
 }
+int ultimo(Lista* l){
+    if(!l)
+        return NULL;
+    No* aux = l->inicio;
+    while(aux->prox != NULL){
+        aux = aux->prox;
+    }
+    return aux->info;
+}
