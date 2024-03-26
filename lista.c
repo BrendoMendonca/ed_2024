@@ -123,4 +123,30 @@ void libera_lista(Lista** l){//função para liberar a lista da memória
     *l = NULL;
 }
 
+ int comprimento(Lista* l){
+    if(!l)
+        return NULL;
+    
+    int tamanho = 0;
+    No* aux = l->inicio;
+    while (aux != NULL){
+        tamanho++;
+        aux = aux->prox;
+    }
+    return tamanho;
+ }
+
+ int maiores (Lista* l, int x){
+    if(!l)
+        return NULL;
+    int quant_maiores = 0;
+    No* aux = l->inicio;
+    while (aux != NULL){
+        if(aux->info > x)
+            quant_maiores++;
+        aux = aux->prox;
+    return quant_maiores;
+    }
+ }
+
 #endif

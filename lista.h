@@ -14,6 +14,8 @@ No* busca_no(Lista* l, int info);
 bool modifica_info(Lista* l, int info, int nova_info);
 void imprime_lista(Lista* l);
 void libera_lista(Lista** l);
+int comprimento(Lista* l);
+int maiores (Lista* l, int x);
 
 
 #endif

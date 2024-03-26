@@ -14,6 +14,7 @@ int main(){
     insere_fim(l ,81);
 
     imprime_lista(l);
+    printf("\nTamanho da lista: %d\n", comprimento(l));
  
     return 0;
 }
