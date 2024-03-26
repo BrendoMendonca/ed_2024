@@ -1,4 +1,6 @@
 /*Funções usando lista encadeada*/
+#ifndef _lista_c_
+#define _lista_c_
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>   
@@ -94,7 +96,7 @@ No* busca_no(Lista* l, int info){//função que retorna um nó específico de ac
 
 void imprime_lista(Lista* l){//função para imprimir a lista
     if(!l)//verifica se a lista é válida
-        return NULL;
+        return;
     No* aux = l->inicio;//nó auxiliar para percorrer a lista
     while(aux != NULL){//o nó auxiliar percorre a lista até o fim imprimindo cada elemento
         printf("%d ", aux->info);
@@ -102,9 +104,9 @@ void imprime_lista(Lista* l){//função para imprimir a lista
     }
 }
 
+
+
 bool modifica_info(Lista* l, int info, int nova_info){//função para modificar a informação de um nó
-    if(!l)//verifica se a lista é válida
-        return NULL;
     No* aux = busca_no(l, info);//nó auxiliar recebe o retorno da função de busca, ou seja, recebe o nó que possui o valor que será alterado
     if(aux == NULL)
         return false;
@@ -129,3 +131,31 @@ int ultimo(Lista* l){
     }
     return aux->info;
 }
+
+ int comprimento(Lista* l){
+    if(!l)
+        return NULL;
+    
+    int tamanho = 0;
+    No* aux = l->inicio;
+    while (aux != NULL){
+        tamanho++;
+        aux = aux->prox;
+    }
+    return tamanho;
+ }
+
+ int maiores (Lista* l, int x){
+    if(!l)
+        return NULL;
+    int quant_maiores = 0;
+    No* aux = l->inicio;
+    while (aux != NULL){
+        if(aux->info > x)
+            quant_maiores++;
+        aux = aux->prox;
+    return quant_maiores;
+    }
+ }
+
+#endif
