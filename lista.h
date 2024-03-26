@@ -16,7 +16,8 @@ void imprime_lista(Lista* l);
 void libera_lista(Lista** l);
 int comprimento(Lista* l);
 int maiores (Lista* l, int x);
-int ultimo(Lista* l)
+int ultimo(Lista* l);
+void concatena(Lista* l1, Lista* l2);
 
 
 #endif

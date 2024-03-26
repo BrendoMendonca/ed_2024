@@ -47,7 +47,7 @@ bool insere_inicio(Lista* l, int info){//função para inserir nó no início da
 
 bool insere_fim(Lista* l, int info){//função para inserir nó no fim da lista
     if(!l)//verifica se a lista é válida
-        return NULL;
+        return false;
 
     No* aux = l->inicio;//um nó auxiliar é criado para percorrer a lista
     while(aux->prox != NULL)//o nó auxiliar percorre a lista até o próximo elemento que ele se encontra for NULL, ou seja, até chegar até o último elemento da lista
@@ -70,7 +70,7 @@ bool remove_inicio(Lista* l){//função para remover nó no início da lista
 
 bool remove_fim(Lista *l){//função para remover o nó no fim da lista
     if(!l)//verifica se a lista passada como parâmetro é válida
-        return NULL;
+        return false;
     if(l->inicio == NULL)//verifica se a lista está vazia
         return false;
     if(l->inicio->prox == NULL)//verifica se só tem um elemento na lista
@@ -124,7 +124,7 @@ void libera_lista(Lista** l){//função para liberar a lista da memória
 }
 int ultimo(Lista* l){
     if(!l)
-        return NULL;
+        return -1;
     No* aux = l->inicio;
     while(aux->prox != NULL){
         aux = aux->prox;
@@ -134,7 +134,7 @@ int ultimo(Lista* l){
 
  int comprimento(Lista* l){
     if(!l)
-        return NULL;
+        return -1;
     
     int tamanho = 0;
     No* aux = l->inicio;
@@ -147,7 +147,7 @@ int ultimo(Lista* l){
 
  int maiores (Lista* l, int x){
     if(!l)
-        return NULL;
+        return -1;
     int quant_maiores = 0;
     No* aux = l->inicio;
     while (aux != NULL){
@@ -156,6 +156,23 @@ int ultimo(Lista* l){
         aux = aux->prox;
     return quant_maiores;
     }
+ }
+
+ void concatena(Lista* l1, Lista* l2){
+    if(!l1 || !l2)
+        return;
+    if(l2->inicio == NULL)
+        return;
+    No* aux = l1->inicio;
+    if(aux == NULL)
+        l1->inicio = l2->inicio;
+    else{
+        while(aux->prox != NULL)
+            aux = aux->prox;
+        aux->prox = l2->inicio;
+    }
+    l2->inicio = NULL;
+    libera_lista(&l2);
  }
 
 #endif
