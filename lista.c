@@ -201,4 +201,20 @@ int ultimo(Lista* l){//função que retorna o último elemento da lista
     }    
  }
 
+ Lista* separa(Lista* l, int x){
+    if(!l)
+        return NULL;
+    Lista* l2 = cria_lista();
+    No* aux = l->inicio;
+    No* anterior = NULL;
+    while(aux != NULL && aux->info != x){
+        anterior = aux;
+        aux = aux->prox;
+    }
+    if(anterior != NULL)
+        anterior->prox = NULL;
+    l2->inicio = aux;
+    return l2;
+ }
+
 #endif

@@ -31,6 +31,12 @@ int main(){
 
     imprime_lista(l1);
     printf("\nTamanho da lista 1 concatenada: %d\n", comprimento(l1));
+
+    Lista* l3 = separa(l1, 81);
+    printf("Lista 3:\n");
+    imprime_lista(l3);
+    printf("\nLista 1:\n");
+    imprime_lista(l1);
  
     return 0;
 }
