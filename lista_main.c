@@ -27,6 +27,8 @@ int main(){
 
     concatena(l1, l2);
 
+    retira_n(l1, 3);
+
     imprime_lista(l1);
     printf("\nTamanho da lista 1 concatenada: %d\n", comprimento(l1));
  

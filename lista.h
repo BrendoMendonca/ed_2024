@@ -18,6 +18,7 @@ int comprimento(Lista* l);
 int maiores (Lista* l, int x);
 int ultimo(Lista* l);
 void concatena(Lista* l1, Lista* l2);
+void retira_n (Lista* l, int x);
 
 
 #endif

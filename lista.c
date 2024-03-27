@@ -122,57 +122,83 @@ void libera_lista(Lista** l){//função para liberar a lista da memória
     free(*l);
     *l = NULL;
 }
-int ultimo(Lista* l){
-    if(!l)
+int ultimo(Lista* l){//função que retorna o último elemento da lista
+    if(!l)//verifica se a lista é válida
         return -1;
-    No* aux = l->inicio;
-    while(aux->prox != NULL){
+    No* aux = l->inicio;//nó auxiliar para percorrer a lista
+    while(aux->prox != NULL){//percorre a lista até o último elemento
         aux = aux->prox;
     }
-    return aux->info;
+    return aux->info;//retorno do último elemento
 }
 
- int comprimento(Lista* l){
+ int comprimento(Lista* l){//função que retorna a quantidade de elementos na lista
     if(!l)
         return -1;
-    
-    int tamanho = 0;
-    No* aux = l->inicio;
-    while (aux != NULL){
-        tamanho++;
+    int tamanho = 0;//variável que irá calcular a quantidade de elementos
+    No* aux = l->inicio;//nó auxiliar para percorrer a lista
+    while (aux != NULL){//percorre toda a lista
+        tamanho++;//incremento da quantidade de elementos
         aux = aux->prox;
     }
-    return tamanho;
+    return tamanho;//retorno da quantidade de elementos da lista
  }
 
- int maiores (Lista* l, int x){
+ int maiores (Lista* l, int x){//função que retorna a quantidade de elementos maiores que o parâmentro "x"
     if(!l)
         return -1;
-    int quant_maiores = 0;
-    No* aux = l->inicio;
+    int quant_maiores = 0;//variável que armazena a quantidade de maiores
+    No* aux = l->inicio;//nó auxiliar para percorrer a lista
     while (aux != NULL){
-        if(aux->info > x)
-            quant_maiores++;
+        if(aux->info > x)//verifica se o elemento da lista é maior que o parêmentro
+            quant_maiores++;//incremento da quantidade de elementos
         aux = aux->prox;
     return quant_maiores;
     }
  }
 
- void concatena(Lista* l1, Lista* l2){
-    if(!l1 || !l2)
+ void concatena(Lista* l1, Lista* l2){//função que concatena a segunda lista ao final da primeira e esvazia a segunda
+    if(!l1 || !l2)//verifica se as listas são válidas
         return;
-    if(l2->inicio == NULL)
+    if(l2->inicio == NULL)//verifica se a segunda lista está vazia
         return;
-    No* aux = l1->inicio;
-    if(aux == NULL)
-        l1->inicio = l2->inicio;
+    No* aux = l1->inicio;//nó auxiliar para percorrer a primeira lista
+    if(aux == NULL)//verifica se a primeira lista está vazia
+        l1->inicio = l2->inicio;//se estiver vazia, o início da segunda lista se torna o início da primeira lista
     else{
-        while(aux->prox != NULL)
+        while(aux->prox != NULL)//percorre a lista até o último elemento da primeira lista
             aux = aux->prox;
-        aux->prox = l2->inicio;
+        aux->prox = l2->inicio;//o próximo do último elemento aponta para o início da segunda lista  e assim as listas são concatenadas
     }
+    //esvazia a segunda lista
     l2->inicio = NULL;
     libera_lista(&l2);
+ }
+
+ void retira_n (Lista* l, int x){
+    if(!l || !l->inicio)//verifica se a lista é válida
+        return;
+    No* aux = l->inicio;//nó auxiliar para percorrer a lista
+    No* anterior = NULL;
+    while(aux != NULL){
+        if(aux->info == x){
+
+            if(anterior == NULL)
+                l->inicio = aux->prox;
+            
+            else
+                anterior->prox = aux->prox;
+            
+            No* temp = aux;
+            aux = aux->prox;
+            free(temp);
+
+        }
+        else{
+            anterior = aux;
+            aux = aux->prox;
+        } 
+    }    
  }
 
 #endif
