@@ -105,7 +105,6 @@ void imprime_lista(Lista* l){//função para imprimir a lista
 }
 
 
-
 bool modifica_info(Lista* l, int info, int nova_info){//função para modificar a informação de um nó
     No* aux = busca_no(l, info);//nó auxiliar recebe o retorno da função de busca, ou seja, recebe o nó que possui o valor que será alterado
     if(aux == NULL)
@@ -132,7 +131,7 @@ int ultimo(Lista* l){//função que retorna o último elemento da lista
     return aux->info;//retorno do último elemento
 }
 
- int comprimento(Lista* l){//função que retorna a quantidade de elementos na lista
+int comprimento(Lista* l){//função que retorna a quantidade de elementos na lista
     if(!l)
         return -1;
     int tamanho = 0;//variável que irá calcular a quantidade de elementos
@@ -144,7 +143,7 @@ int ultimo(Lista* l){//função que retorna o último elemento da lista
     return tamanho;//retorno da quantidade de elementos da lista
  }
 
- int maiores (Lista* l, int x){//função que retorna a quantidade de elementos maiores que o parâmentro "x"
+int maiores (Lista* l, int x){//função que retorna a quantidade de elementos maiores que o parâmentro "x"
     if(!l)
         return -1;
     int quant_maiores = 0;//variável que armazena a quantidade de maiores
@@ -157,7 +156,7 @@ int ultimo(Lista* l){//função que retorna o último elemento da lista
     }
  }
 
- void concatena(Lista* l1, Lista* l2){//função que concatena a segunda lista ao final da primeira e esvazia a segunda
+void concatena(Lista* l1, Lista* l2){//função que concatena a segunda lista ao final da primeira e esvazia a segunda
     if(!l1 || !l2)//verifica se as listas são válidas
         return;
     if(l2->inicio == NULL)//verifica se a segunda lista está vazia
@@ -175,7 +174,7 @@ int ultimo(Lista* l){//função que retorna o último elemento da lista
     libera_lista(&l2);
  }
 
- void retira_n (Lista* l, int x){
+void retira_n (Lista* l, int x){
     if(!l || !l->inicio)//verifica se a lista é válida
         return;
     No* aux = l->inicio;//nó auxiliar para percorrer a lista
@@ -201,7 +200,7 @@ int ultimo(Lista* l){//função que retorna o último elemento da lista
     }    
  }
 
- Lista* separa(Lista* l, int x){
+Lista* separa(Lista* l, int x){
     if(!l)
         return NULL;
     Lista* l2 = cria_lista();
@@ -216,5 +215,53 @@ int ultimo(Lista* l){//função que retorna o último elemento da lista
     l2->inicio = aux;
     return l2;
  }
+
+Lista* merge(Lista* l1, Lista* l2){
+    if(!l1 || !l2)
+        return NULL;
+    Lista* l3 = cria_lista();
+    No* aux1 = l1->inicio;
+    No* aux2 = l2 ->inicio;
+    while(aux1 != NULL || aux2 != NULL){
+        
+        if(aux1 != NULL){
+            if(l3->inicio == NULL)
+                insere_inicio(l3, aux1->info);
+            else{
+                insere_fim(l3, aux1->info);
+            }
+            aux1 = aux1->prox;
+        }
+
+        if(aux2 != NULL){
+            if(l3->inicio == NULL)
+                insere_inicio(l3, aux2->info);
+            else{
+                insere_fim(l3, aux2->info);
+            }            
+            aux2 = aux2->prox;
+        }
+    }
+    
+    libera_lista(&l1);
+    libera_lista(&l2);
+    return l3;
+ }
+
+void inverte(Lista* l){
+    if(!l)
+        return;
+    No* aux = l->inicio;
+    No* anterior = NULL;
+    No* sucessor = l->inicio;
+
+    while(sucessor != NULL){
+
+        anterior = sucessor;        
+        aux->prox = anterior;
+        sucessor = sucessor->prox;
+    }
+}
+
 
 #endif

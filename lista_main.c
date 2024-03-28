@@ -25,18 +25,7 @@ int main(){
     printf("\nTamanho da lista 1: %d\n", comprimento(l1));
     printf("\nTamanho da lista 2: %d\n", comprimento(l2));
 
-    concatena(l1, l2);
-
-    retira_n(l1, 3);
-
-    imprime_lista(l1);
-    printf("\nTamanho da lista 1 concatenada: %d\n", comprimento(l1));
-
-    Lista* l3 = separa(l1, 81);
-    printf("Lista 3:\n");
-    imprime_lista(l3);
-    printf("\nLista 1:\n");
-    imprime_lista(l1);
+    imprime_lista(merge(l1, l2));    
  
     return 0;
 }
