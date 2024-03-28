@@ -48,13 +48,17 @@ bool insere_inicio(Lista* l, int info){//função para inserir nó no início da
 bool insere_fim(Lista* l, int info){//função para inserir nó no fim da lista
     if(!l)//verifica se a lista é válida
         return false;
+    if(l->inicio == NULL)
+        insere_inicio(l, info);
+    else{ 
 
-    No* aux = l->inicio;//um nó auxiliar é criado para percorrer a lista
-    while(aux->prox != NULL)//o nó auxiliar percorre a lista até o próximo elemento que ele se encontra for NULL, ou seja, até chegar até o último elemento da lista
-        aux = aux->prox;
-    
-    aux->prox = cria_no(info);//quando o nó auxiliar chega no último elemento da lista, o próx dele aponta para um novo nó que será o novo último nó da lista
-    return(aux->prox != NULL);
+        No* aux = l->inicio;//um nó auxiliar é criado para percorrer a lista
+        while(aux->prox != NULL)//o nó auxiliar percorre a lista até o próximo elemento que ele se encontra for NULL, ou seja, até chegar até o último elemento da lista
+            aux = aux->prox;
+        
+        aux->prox = cria_no(info);//quando o nó auxiliar chega no último elemento da lista, o próx dele aponta para um novo nó que será o novo último nó da lista
+        return(aux->prox != NULL);
+    }
 }
 
 bool remove_inicio(Lista* l){//função para remover nó no início da lista
@@ -253,14 +257,31 @@ void inverte(Lista* l){
         return;
     No* aux = l->inicio;
     No* anterior = NULL;
-    No* sucessor = l->inicio;
+    No* sucessor = NULL;
 
-    while(sucessor != NULL){
+    while(aux != NULL){
 
-        anterior = sucessor;        
+        sucessor = aux->prox;       
         aux->prox = anterior;
-        sucessor = sucessor->prox;
+        anterior = aux;
+        aux = sucessor;
     }
+
+    l->inicio = anterior;
+
+}
+
+Lista* copia(Lista* l){
+    if(!l)
+        return NULL;
+    Lista* l2 = cria_lista();
+    No* aux = l->inicio;
+
+    while(aux != NULL){
+        insere_fim(l2, aux->info);
+        aux = aux->prox;        
+    }
+    return l2;
 }
 
 

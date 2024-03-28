@@ -22,5 +22,6 @@ void retira_n (Lista* l, int x);
 Lista* separa(Lista* l, int x);
 Lista* merge (Lista* l1 , Lista* l2 );
 void inverte(Lista* l);
+Lista* copia(Lista* l);
 
 #endif
