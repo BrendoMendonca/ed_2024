@@ -34,6 +34,9 @@ int main(){
     copia(l1);
     printf("\ncopia da lista:\n");
     imprime_lista(l1);
+    printf("\n");
+    para_circular(l1);
+    
  
     return 0;
 }

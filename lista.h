@@ -23,5 +23,7 @@ Lista* separa(Lista* l, int x);
 Lista* merge (Lista* l1 , Lista* l2 );
 void inverte(Lista* l);
 Lista* copia(Lista* l);
+void para_circular (Lista* l);
+void imprime_circular(Lista* l);
 
 #endif

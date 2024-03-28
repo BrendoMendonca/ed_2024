@@ -284,5 +284,26 @@ Lista* copia(Lista* l){
     return l2;
 }
 
+void para_circular (Lista* l){
+    if (!l)
+        return;
+    No* aux = l->inicio;
+    while(aux->prox != NULL){
+        aux = aux->prox;
+    }
+    aux->prox = l->inicio;
+}
 
+void imprime_circular(Lista* l){
+    if(!l)
+        return;
+    No* aux = l->inicio;
+    int registro = 0;
+    while(registro < comprimento(l)){
+        aux = aux->prox;
+        printf("%d ", aux->info);
+        registro++;
+    }
+
+}
 #endif
