@@ -36,6 +36,9 @@ int main(){
     imprime_lista(l1);
     printf("\n");
     para_circular(l1);
+    printf("Impressao lista circular\n");
+    imprime_circular(l1);
+
     
  
     return 0;

@@ -298,12 +298,10 @@ void imprime_circular(Lista* l){
     if(!l)
         return;
     No* aux = l->inicio;
-    int registro = 0;
-    while(registro < comprimento(l)){
-        aux = aux->prox;
+    do{
         printf("%d ", aux->info);
-        registro++;
-    }
-
+        aux = aux->prox;
+    } while (aux != l->inicio);
+    
 }
 #endif

@@ -25,5 +25,7 @@ void inverte(Lista* l);
 Lista* copia(Lista* l);
 void para_circular (Lista* l);
 void imprime_circular(Lista* l);
+void retira_inicio ( Lista* l);
+void retira_final (Lista* l);
 
 #endif
