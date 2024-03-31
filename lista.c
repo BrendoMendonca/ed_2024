@@ -201,27 +201,27 @@ Lista* separa(Lista* l, int x){//função que cria outra lista a partir da lista
         return NULL;
     Lista* l2 = cria_lista();//criação da nova lista
     No* aux = l->inicio;//nó auxiliar para percorrer a lista
-    No* aux2 = NULL;
-    while(aux != NULL && aux->info != x){
-        aux2 = aux;
-        aux = aux->prox;
+    No* aux2 = NULL;//segundo nó auxilar para determinar o ponto de separação
+    while(aux != NULL && aux->info != x){//percorre a lista até encontrar o elemento que dá inicio à nova lista ou até a lista original acabar
+        aux2 = aux;//enquanto não encontrar o elemento, aux2 recebe uma cópia de aux
+        aux = aux->prox;//incremento da posição de aux
     }
     if(aux2 != NULL)
-        aux2->prox = NULL;
-    l2->inicio = aux;
+        aux2->prox = NULL;//finaliza a lista original apontando seu novo último elemento para null
+    l2->inicio = aux;//o início da segunda lista será o prox do último elemento da lista original que foi dividida
     return l2;
  }
 
-Lista* merge(Lista* l1, Lista* l2){
-    if(!l1 || !l2)
+Lista* merge(Lista* l1, Lista* l2){//função que une duas listas
+    if(!l1 || !l2)//verifica se as  duas listas são válidas
         return NULL;
-    Lista* l3 = cria_lista();
-    No* aux1 = l1->inicio;
-    No* aux2 = l2 ->inicio;
+    Lista* l3 = cria_lista();//criação da lista que será a união das duas passadas como parâmetro
+    No* aux1 = l1->inicio;//nó axiliar para percorrer a lista 1
+    No* aux2 = l2 ->inicio;//nó axiliar para percorrer a lista 1
     while(aux1 != NULL || aux2 != NULL){
         
-        if(aux1 != NULL){
-            if(l3->inicio == NULL)
+        if(aux1 != NULL){//verifica se aux1 já chegou ao fim da lista
+            if(l3->inicio == NULL)//caso ainda não tenha elemento na lista l3
                 insere_inicio(l3, aux1->info);
             else{
                 insere_fim(l3, aux1->info);
@@ -229,8 +229,8 @@ Lista* merge(Lista* l1, Lista* l2){
             aux1 = aux1->prox;
         }
 
-        if(aux2 != NULL){
-            if(l3->inicio == NULL)
+        if(aux2 != NULL){//verifica se aux2 já chegou ao fim da lista
+            if(l3->inicio == NULL)//caso ainda não tenha elemento na lista l3
                 insere_inicio(l3, aux2->info);
             else{
                 insere_fim(l3, aux2->info);
@@ -238,62 +238,63 @@ Lista* merge(Lista* l1, Lista* l2){
             aux2 = aux2->prox;
         }
     }
-    
+    //liberação das listas originais
+    l1->inicio = NULL;
     libera_lista(&l1);
+    l2->inicio = NULL;
     libera_lista(&l2);
     return l3;
  }
 
-void inverte(Lista* l){
+void inverte(Lista* l){//função que inverte a ordem de uma lista
     if(!l)
         return;
-    No* aux = l->inicio;
-    No* anterior = NULL;
-    No* sucessor = NULL;
+    No* aux = l->inicio;//nó auxiliar para percorrer a lista
+    No* anterior = NULL;//nó para armazenar o nó anterior de aux
+    No* sucessor = NULL;//nó para guardar o nó sucessor de aux, pois o prox será usado para apontar o elemento anterior de aux e assim inverter a ordem
 
     while(aux != NULL){
 
-        sucessor = aux->prox;       
-        aux->prox = anterior;
-        anterior = aux;
-        aux = sucessor;
+        sucessor = aux->prox;//recebe o elemento sucessor de aux
+        aux->prox = anterior;//o prox passa a fazer referencia ao elemento anterior de aux
+        anterior = aux;//atualização do novo anterior de aux
+        aux = sucessor;//atualização de aux para a próxima posição
     }
-
-    l->inicio = anterior;
-
+    //no final do loop aux armazena o último elemento da lista, que passará a ser o primeiro elemento
+    l->inicio = anterior;//o início da lista agora é o último elemento
 }
 
-Lista* copia(Lista* l){
+Lista* copia(Lista* l){//função que copia uma lista e retorna a lista copiada
     if(!l)
         return NULL;
-    Lista* l2 = cria_lista();
-    No* aux = l->inicio;
+    Lista* l2 = cria_lista();//lista que receberá os elementos copiados
+    No* aux = l->inicio;//nó auxiliar para percorrer a lista original
 
     while(aux != NULL){
-        insere_fim(l2, aux->info);
+        insere_fim(l2, aux->info);//para cada elemento percorrido na lista original, esse mesmo elemento é inserido no final da lista cópia
         aux = aux->prox;        
     }
     return l2;
 }
 
-void para_circular (Lista* l){
+void para_circular (Lista* l){//função que transforma uma lista simples em uma lista circular
     if (!l)
         return;
-    No* aux = l->inicio;
+    No* aux = l->inicio;//nó auxiliar para percorrer a lista
     while(aux->prox != NULL){
         aux = aux->prox;
     }
-    aux->prox = l->inicio;
+    aux->prox = l->inicio;//faz o último elemento da lista apontar para o primeiro elemento da lista, fazendo assim uma lista circular
 }
 
-void imprime_circular(Lista* l){
+void imprime_circular(Lista* l){//função para imprimir a lista circular
     if(!l)
         return;
-    No* aux = l->inicio;
+    No* aux = l->inicio;//nó auxiliar para percorrer a lista
     do{
-        printf("%d ", aux->info);
-        aux = aux->prox;
-    } while (aux != l->inicio);
+        printf("%d ", aux->info);//print do conteúdo
+        aux = aux->prox;//incrementeo de aux para a próxima posição
+    } while (aux != l->inicio);//imprime até que aux seja igual ao início novamente
     
 }
 #endif

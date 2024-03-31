@@ -17,30 +17,31 @@ int main(){
     insere_inicio(l2, 7);
     insere_inicio(l2, 6);
     insere_inicio(l2, 4);
-
-
-    imprime_lista(l1);
-    printf("\n");
-    imprime_lista(l2);
-    printf("\nTamanho da lista 1: %d\n", comprimento(l1));
-    printf("\nTamanho da lista 2: %d\n", comprimento(l2));
-   
-    //imprime_lista(merge(l1, l2)); 
-
-    inverte(l1);
-    printf("\n");
-    retira_n(l1, 3);
-    imprime_lista(l1);
-
-    copia(l1);
-    printf("\ncopia da lista:\n");
-    imprime_lista(l1);
-    printf("\n");
-    para_circular(l1);
-    printf("Impressao lista circular\n");
-    imprime_circular(l1);
-
     
- 
+    printf("\nLista 1:\n");
+    imprime_lista(l1);
+
+    printf("\nLista 2:\n");
+    imprime_lista(l2);
+
+    concatena(l1, l2);
+    printf("\nLista concatenada:\n");
+    imprime_lista(l1);
+    
+    l2 = separa(l1, 3);
+    printf("\nLista 2:\n");
+    imprime_lista(l2);
+
+    printf("\nLista 1 separada:\n");
+    imprime_lista(l1);
+    
+    Lista* l3 = merge(l1, l2);
+    printf("\nLista 3:\n");
+    imprime_lista(l3);
+
+    inverte(l3);
+    printf("\nLista 3 invertida:\n");
+    imprime_lista(l3);
+
     return 0;
 }
