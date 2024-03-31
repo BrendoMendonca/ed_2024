@@ -29,6 +29,7 @@ int main(){
 
     inverte(l1);
     printf("\n");
+    retira_n(l1, 3);
     imprime_lista(l1);
 
     copia(l1);

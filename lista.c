@@ -178,44 +178,36 @@ void concatena(Lista* l1, Lista* l2){//função que concatena a segunda lista ao
     libera_lista(&l2);
  }
 
-void retira_n (Lista* l, int x){
+void retira_n (Lista* l, int x){//função para retirar um elemento "x" da lista
     if(!l || !l->inicio)//verifica se a lista é válida
         return;
     No* aux = l->inicio;//nó auxiliar para percorrer a lista
-    No* anterior = NULL;
-    while(aux != NULL){
-        if(aux->info == x){
+    No* aux2 = NULL;//nó auxiliar que armazena o elemento removido da lista
+    while(aux->prox != NULL){
+        if(aux == l->inicio && aux->info == x)//caso o primeiro elemento da lista seja igual a "x"
+            remove_inicio(l);
 
-            if(anterior == NULL)
-                l->inicio = aux->prox;
-            
-            else
-                anterior->prox = aux->prox;
-            
-            No* temp = aux;
-            aux = aux->prox;
-            free(temp);
-
+        else if(aux->prox->info == x){//verifica o conteúdo do próximo elemento
+            aux2 = aux->prox;//aux2 aponta para o elemento que será removido
+            aux->prox = aux2->prox;//o próximo de aux aponta para o elemento posterior do nó que será removido
+            free(aux2);//libera o nó removido
         }
-        else{
-            anterior = aux;
-            aux = aux->prox;
-        } 
-    }    
+        aux = aux->prox;//incremento de aux
+    }   
  }
 
-Lista* separa(Lista* l, int x){
-    if(!l)
+Lista* separa(Lista* l, int x){//função que cria outra lista a partir da lista passada como parâmetro e do inteiro que será o início da nova lista
+    if(!l)//verifica se a lista é válida
         return NULL;
-    Lista* l2 = cria_lista();
-    No* aux = l->inicio;
-    No* anterior = NULL;
+    Lista* l2 = cria_lista();//criação da nova lista
+    No* aux = l->inicio;//nó auxiliar para percorrer a lista
+    No* aux2 = NULL;
     while(aux != NULL && aux->info != x){
-        anterior = aux;
+        aux2 = aux;
         aux = aux->prox;
     }
-    if(anterior != NULL)
-        anterior->prox = NULL;
+    if(aux2 != NULL)
+        aux2->prox = NULL;
     l2->inicio = aux;
     return l2;
  }
