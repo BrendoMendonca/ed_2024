@@ -1,6 +1,9 @@
+#ifndef _pilha_c_
+#define _pilha_c_
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "pilha.h"
 #define  TAM 10 //tamanho de elementos que pode ter na pilha definida
 
 struct elemento{//struct que representa os elementos da pilha
@@ -13,8 +16,6 @@ struct pilha{//pilha que contém os elementos
     int tamanho;
 };
 
-typedef struct elemento Elemento;
-typedef struct pilha Pilha;
 
 Elemento* cria_elemento(int info){//função para criar um elemento
     Elemento* e = (Elemento*) malloc(sizeof(Elemento));//alocação de memória
@@ -91,10 +92,12 @@ void imprime_pilha(Pilha* p){//função para imprimir os elementos da pilha
     if(!p)
         return;
     Elemento* aux = p->topo;//nó auxiliar para percorrer a pilha
+    printf("\n");
     while(aux != NULL){
         printf("%d \n", aux->info);//exibição dos elementos
         aux = aux->prox;
     }
+    printf("\n");
 }
 
 int topo(Pilha* p){//função que retorna o topo da pilha
@@ -140,3 +143,5 @@ Pilha* copia_pilha(Pilha* p){//função que faz a cópia de uma pilha
     libera_pilha(&p_aux);//liberação da pilha auxiliar
     return p_copia;
 }
+
+#endif
