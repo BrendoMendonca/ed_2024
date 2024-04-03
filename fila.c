@@ -2,64 +2,58 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #define _TAM_ 40
-struct fila{
-    int info[_TAM_];
-    int inicio;
-    int n;
+
+struct elemento{
+    int info;
+    struct elemento* prox;
 };
 
+struct fila{
+    struct elemento* fim;
+};
+
+typedef struct elemento Elemento;
 typedef struct fila Fila;
+
+Elemento* cria_no(int info){
+    Elemento* no = (Elemento*) malloc(sizeof(Elemento));
+    if(!no)
+        return NULL;
+    no->info = info;
+    no->prox = NULL;
+    return no;
+}
 
 Fila* cria_fila(){
     Fila* f = (Fila*) malloc(sizeof(Fila));
     if(!f)
         return NULL;
-    f->inicio = -1;
-    f->n = 0;
+    f->fim = NULL;
     return f;
 }
 
-int tamanho_fila(Fila* f){
+bool insere_fila(Fila* f, int info){
     if(!f)
-        return -1;
-    return f->n;    
+        return false;
+    Elemento* no = cria_no(info);
+    if(f->fim == NULL)    {
+        f->fim = no;
+        return true;
+    }
+    no->prox = f->fim;
+    f->fim = no;
+    return true;
 }
 
-bool esta_cheia(Fila* f){
-    if(!f)
+bool retira_fila(Fila* f){
+    if(!f || f->fim == NULL)
         return false;
-    return (f->n == _TAM_);
-}
-
-bool esta_vazia(Fila* f){
-    if(!f)
-        return false;
-    return(f->n == 0);
-}
-
-bool insere(Fila* f, int info){
-    if(!f)
-        return false;
-    if(f->n == _TAM_)
-        return false;
-
-    f->inicio ++;
-
-    if(f->inicio == _TAM_)
-        f->inicio = 0;
+    Elemento* aux = f->fim;
+    while(aux->prox->prox != NULL)
+        aux = aux->prox;
+    Elemento* aux2 = aux->prox;
+    aux->prox = NULL;
+    free(aux2);
+    return true;   
     
-    f->info[f->inicio] = info;
-    f->n++;
-    return true;
-}
-
-bool retira(Fila* f, int* info){
-    if(!f || !info)
-        return false;
-    int pos = f->inicio - f->n+1;
-    if (pos < 0)
-        pos += f->n;
-    *info = f->info[pos];
-    f->n--;
-    return true;
 }
